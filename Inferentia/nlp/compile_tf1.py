@@ -17,6 +17,22 @@ model_type ='bert_base'
 # original_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
 
+trained_checkpoint_prefix = 'bert_base/bert_model.ckpt'
+export_dir = os.path.join('bert_base_saved_model', '0')
+
+graph = tf.Graph()
+with tf.compat.v1.Session(graph=graph) as sess:
+    # Restore from checkpoint
+    loader = tf.compat.v1.train.import_meta_graph(trained_checkpoint_prefix + '.meta')
+    loader.restore(sess, trained_checkpoint_prefix)
+
+    # Export checkpoint to SavedModel
+    builder = tf.compat.v1.saved_model.builder.SavedModelBuilder(export_dir)
+    builder.add_meta_graph_and_variables(sess,
+                                         [tf.saved_model.TRAINING, tf.saved_model.SERVING],
+                                         strip_default_attrs=True)
+    builder.save()
+
 def compile_inf1_model(saved_model_dir, inf1_model_dir, batch_size=1, use_static_weights=False):
     print(f'-----------batch size: {batch_size}----------')
     print('Compiling...')
