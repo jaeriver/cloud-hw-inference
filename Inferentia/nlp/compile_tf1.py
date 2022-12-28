@@ -18,7 +18,7 @@ model_type ='bert_base'
 
 
 trained_checkpoint_prefix = 'bert_base/bert_model.ckpt'
-export_dir = os.path.join('bert_base_saved_model', '0')
+export_dir = 'bert_base_saved_model'
 
 graph = tf.Graph()
 with tf.compat.v1.Session(graph=graph) as sess:
