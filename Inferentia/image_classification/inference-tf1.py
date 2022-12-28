@@ -142,30 +142,59 @@ def inf1_predict_benchmark_single_threaded(neuron_saved_model_name, batch_size, 
     counter = 0
     
     
-    for batch, batch_labels in ds:
-        start_time = time.time()
-        yhat_np = inference_function(batch)
-        if counter ==0:
-            first_iter_time = time.time() - start_time
-        else:
-            iter_times.append(time.time() - start_time)
-        actual_labels.extend(label for label_list in batch_labels for label in label_list)
-        pred_labels.extend(list(np.argmax(yhat_np, axis=1)))
+    with tf.Session() as sess:
+        try:
+#              with futures.ThreadPoolExecutor(8) as exe:
+            sess.run(ds_init_op)
+            counter = 0
 
-        if counter*batch_size >= display_threshold:
-            print(f'Images {counter*batch_size}/{total_datas}. Average i/s {np.mean(batch_size/np.array(iter_times[-display_every:]))}')
-            display_threshold+=display_every
+            total_datas = 1000
+            display_every = 100
+            display_threshold = display_every
 
-        counter+=1
-        if counter == 100:
-            break
+            ipname = list(model_inf1.feed_tensors.keys())[0]
+            resname = list(model_inf1.fetch_tensors.keys())[0]
+
+            walltime_start = time.time()
+            warmup_time = []
+            extend_time = []
+            while True:
+                sess_start = time.time()
+                (validation_ds,batch_labels,_) = sess.run(ds_next)
+
+                model_feed_dict={ipname: validation_ds}
+                warmup_start = time.time()
+                if counter == 0:
+                    for i in range(warm_up):
+                        _ = model_inf1(model_feed_dict);                    
+                warmup_time.append(time.time() - warmup_start)
+                start_time =time.time()
+                model_inf1(model_feed_dict)
+                if counter == 0:
+                    first_iter_time = time.time() - start_time
+                else:
+                    iter_times.append(time.time() - start_time)
+
+                actual_labels.extend(label for label_list in batch_labels for label in label_list)
+
+                if counter*user_batch_size >= display_threshold:
+                    print(f'Images {counter*user_batch_size}/{total_datas}. Average i/s {np.mean(user_batch_size/np.array(iter_times[-display_every:]))}')
+                    display_threshold+=display_every
+                
+                counter+=1
+                
+                if counter == 100:
+                    break
+                    
+        except tf.errors.OutOfRangeError:
+            pass
 
     iter_times = np.array(iter_times)
-    acc_inf1 = np.sum(np.array(actual_labels) == np.array(pred_labels))/len(actual_labels)
+#     acc_inf1 = np.sum(np.array(actual_labels) == np.array(pred_labels))/len(actual_labels)
     results = pd.DataFrame(columns = [f'inf1_tf1_{model_type}_{batch_size}'])
     results.loc['batch_size']              = [batch_size]
     results.loc['user_batch_size']              = [user_batch_size]
-    results.loc['accuracy']                = [acc_inf1]
+#     results.loc['accuracy']                = [acc_inf1]
     results.loc['first_prediction_time']   = [first_iter_time * 1000]
     results.loc['next_inference_time_mean'] = [np.mean(iter_times) * 1000]
     results.loc['next_inference_time_median'] = [np.median(iter_times) * 1000]
@@ -207,7 +236,7 @@ for model_type in model_types:
                                                                              use_cache=False, 
                                                                              warm_up=10)
 
-            iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
-            results = pd.concat([results, res], axis=1)
-        print(results)
-    results.to_csv(f'inf_{model_type}_batch_size_{user_batch}.csv')
+         iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
+         results = pd.concat([results, res], axis=1)
+     print(results)
+     results.to_csv(f'inf_{model_type}_batch_size_{user_batch}.csv')
