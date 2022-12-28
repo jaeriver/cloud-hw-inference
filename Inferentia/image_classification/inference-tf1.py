@@ -163,7 +163,7 @@ def inf1_predict_benchmark_single_threaded(neuron_saved_model_name, batch_size, 
             extend_time = []
             while True:
                 sess_start = time.time()
-                (validation_ds,batch_labels,_) = sess.run(ds_next)
+                (validation_ds,batch_labels) = sess.run(ds_next)
 
                 model_feed_dict={ipname: validation_ds}
                 warmup_start = time.time()
