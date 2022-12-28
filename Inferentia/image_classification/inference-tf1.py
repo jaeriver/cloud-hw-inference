@@ -141,6 +141,9 @@ def inf1_predict_benchmark_single_threaded(neuron_saved_model_name, batch_size, 
     ds = get_dataset(user_batch_size, use_cache)
     counter = 0
     
+    ds_iter = ds.make_initializable_iterator()
+    ds_next = ds_iter.get_next()
+    ds_init_op = ds_iter.initializer
     
     with tf.Session() as sess:
         try:
