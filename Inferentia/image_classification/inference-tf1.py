@@ -236,7 +236,7 @@ for model_type in model_types:
                                                                              use_cache=False, 
                                                                              warm_up=10)
 
-         iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
-         results = pd.concat([results, res], axis=1)
+        iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
+        results = pd.concat([results, res], axis=1)
      print(results)
      results.to_csv(f'inf_{model_type}_batch_size_{user_batch}.csv')
