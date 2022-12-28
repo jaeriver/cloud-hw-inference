@@ -59,16 +59,16 @@ models = {
 #     'efficientnetb4':efficientnet,
 #     'efficientnetb5':efficientnet,
 #     'efficientnetb6':efficientnet,
-    'efficientnetb7':efficientnet,
-    'efficientnet_v2b0':efficientnet_v2,
-    'efficientnet_v2b1':efficientnet_v2,
-    'efficientnet_v2b2':efficientnet_v2,
-    'efficientnet_v2b3':efficientnet_v2,
-    'efficientnet_v2l':efficientnet_v2,
-    'efficientnet_v2m':efficientnet_v2,
-    'efficientnet_v2s':efficientnet_v2,
-    'mobilenet_v3small':mobilenet_v3,
-    'mobilenet_v3large':mobilenet_v3,
+#     'efficientnetb7':efficientnet,
+#     'efficientnet_v2b0':efficientnet_v2,
+#     'efficientnet_v2b1':efficientnet_v2,
+#     'efficientnet_v2b2':efficientnet_v2,
+#     'efficientnet_v2b3':efficientnet_v2,
+#     'efficientnet_v2l':efficientnet_v2,
+#     'efficientnet_v2m':efficientnet_v2,
+#     'efficientnet_v2s':efficientnet_v2,
+#     'mobilenet_v3small':mobilenet_v3,
+#     'mobilenet_v3large':mobilenet_v3,
 }
 data_dir = os.environ['dataset']
 
@@ -189,7 +189,8 @@ for model_type in model_types:
 #     batch_list = [1, 2, 4, 8, 16, 32, 64]
     batch_list = [1]
     user_batchs = [1]
-    inf1_model_dir = f'{model_type}_inf1_saved_models'
+#     inf1_model_dir = f'{model_type}_inf1_saved_models'
+    inf1_model_dir = f'tf1'
     
     iter_ds = pd.DataFrame()
     results = pd.DataFrame()
