@@ -115,28 +115,28 @@ model_types = [key for key, value in models_detail.items()]
 
 print(model_types)
 
-# for model_type in model_types:
-#     # https://github.com/tensorflow/tensorflow/issues/29931
-#     temp = tf.zeros([8, 224, 224, 3])
-#     _ = models[model_type].preprocess_input(temp)
+for model_type in model_types:
+    # https://github.com/tensorflow/tensorflow/issues/29931
+    temp = tf.zeros([8, 224, 224, 3])
+    _ = models[model_type].preprocess_input(temp)
 
-#     # Export SavedModel
+    # Export SavedModel
 
-#     saved_model_dir = f'{model_type}_saved_model'
-#     shutil.rmtree(saved_model_dir, ignore_errors=True)
-#     os.mkdir(saved_model_dir)
+    saved_model_dir = f'{model_type}_saved_model'
+    shutil.rmtree(saved_model_dir, ignore_errors=True)
+    os.mkdir(saved_model_dir)
     
-#     model = models_detail[model_type]
-#     # tf1 api
-#     tf.saved_model.simple_save(session = keras.backend.get_session(),
-#                            export_dir = saved_model_dir,
-#                            inputs = {'input_1:0': model.inputs[0]},
-#                            outputs = {'probs/Softmax:0': model.outputs[0]})
-#     #tf2 api
-# #     model.save(saved_model_dir)
+    model = models_detail[model_type]
+    # tf1 api
+    tf.saved_model.simple_save(session = keras.backend.get_session(),
+                           export_dir = saved_model_dir,
+                           inputs = {'input_1:0': model.inputs[0]},
+                           outputs = {'probs/Softmax:0': model.outputs[0]})
+    #tf2 api
+#     model.save(saved_model_dir)
 
-# #     from tensorflow.keras.models import load_model
-# #     model = load_model(saved_model_dir, compile=True)
+#     from tensorflow.keras.models import load_model
+#     model = load_model(saved_model_dir, compile=True)
 
 # #     model.summary()
 
