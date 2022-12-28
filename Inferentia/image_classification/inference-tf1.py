@@ -22,11 +22,11 @@ from tensorflow.keras.applications import (
     densenet,
     nasnet,
     mobilenet_v2,
-    efficientnet,
-    efficientnet_v2,
-    mobilenet_v3,
-    MobileNetV3Small,
-    MobileNetV3Large,
+#     efficientnet,
+#     efficientnet_v2,
+#     mobilenet_v3,
+#     MobileNetV3Small,
+#     MobileNetV3Large,
 )
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
