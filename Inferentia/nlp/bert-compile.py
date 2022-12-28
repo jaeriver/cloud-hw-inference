@@ -50,7 +50,7 @@ saved_model_dir = f'{model_type}_saved_model'
 
 
 # testing batch size
-batch_list = [1,2,4,8,16,32,64]
+batch_list = [1]
 for batch in batch_list:
     print('batch size:', batch, 'compile start')
     compile_inf1_model(saved_model_dir, inf1_model_dir, batch_size=batch)
