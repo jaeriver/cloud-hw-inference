@@ -34,16 +34,16 @@ from concurrent import futures
 from itertools import compress
 
 models = {
-#     'xception':xception,
-#     'vgg16':vgg16,
+    'xception':xception,
+    'vgg16':vgg16,
     'vgg19':vgg19,
-#     'resnet50':resnet50,
+    'resnet50':resnet50,
     'resnet101':resnet,
     'resnet152':resnet,
     'resnet50_v2':resnet_v2,
     'resnet101_v2':resnet_v2,
     'resnet152_v2':resnet_v2,
-#     'inception_v3':inception_v3,
+    'inception_v3':inception_v3,
     'inception_resnet_v2':inception_resnet_v2,
     'mobilenet':mobilenet,
     'densenet121':densenet,
@@ -51,7 +51,7 @@ models = {
     'densenet201':densenet,
     'nasnetmobile':nasnet,
     'nasnetlarge':nasnet,
-#     'mobilenet_v2':mobilenet_v2
+    'mobilenet_v2':mobilenet_v2
 #     'efficientnetb0':efficientnet,
 #     'efficientnetb1':efficientnet,
 #     'efficientnetb2':efficientnet,
@@ -242,4 +242,4 @@ for model_type in model_types:
         iter_ds = pd.concat([iter_ds, pd.DataFrame(iter_times, columns=[col_name(opt)])], axis=1)
         results = pd.concat([results, res], axis=1)
     print(results)
-    results.to_csv(f'inf_{model_type}_batch_size_{user_batch}.csv')
+    results.to_csv(f'tf1inf_{model_type}_batch_size_{user_batch}.csv')
