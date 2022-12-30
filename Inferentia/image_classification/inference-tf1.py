@@ -41,7 +41,7 @@ models = {
 #     'resnet101':resnet,
 #     'resnet152':resnet,
 #     'resnet50_v2':resnet_v2,
-    'resnet101_v2':resnet_v2,
+#     'resnet101_v2':resnet_v2,
     'resnet152_v2':resnet_v2,
     'inception_v3':inception_v3,
     'inception_resnet_v2':inception_resnet_v2,
