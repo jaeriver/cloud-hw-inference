@@ -39,7 +39,7 @@ from tensorflow.keras.layers import Input
 input_tensor = Input(shape=(224, 224, 3))
 
 model_types = [
-    'xception',
+    # 'xception',
     'vgg16',
     'vgg19',
     'resnet50',
