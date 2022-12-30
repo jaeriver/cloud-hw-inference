@@ -77,7 +77,7 @@ model_types = [
 ]
 
 def get_flops():
-    run_meta = tf.RunMetadata()
+    run_meta = tf.compat.v1.RunMetadata()
     opts = tf.profiler.ProfileOptionBuilder.float_operation()
 
     # We use the Keras session graph in the call to the profiler.
