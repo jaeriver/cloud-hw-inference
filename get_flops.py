@@ -92,6 +92,6 @@ def get_flops():
 
 for model_type in model_types:
     mtype = model_type
-    model = load_model(model_type + '_saved_model')
+    model = tf.compat.v1.saved_model.load_v2(model_type + '_saved_model')
     print(model_type)
     print(get_flops())
