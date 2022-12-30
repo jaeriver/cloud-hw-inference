@@ -37,24 +37,24 @@ from tensorflow.keras.layers import Input
 input_tensor = Input(shape=(224, 224, 3))
 
 models = {
-    'xception':xception,
-    'vgg16':vgg16,
+    # 'xception':xception,
+    # 'vgg16':vgg16,
 #     'vgg19':vgg19,
-    'resnet50':resnet50,
+#     'resnet50':resnet50,
 #     'resnet101':resnet,
 #     'resnet152':resnet,
 #     'resnet50_v2':resnet_v2,
 #     'resnet101_v2':resnet_v2,
 #     'resnet152_v2':resnet_v2,
-    'inception_v3':inception_v3,
+#     'inception_v3':inception_v3,
 #     'inception_resnet_v2':inception_resnet_v2,
 #     'mobilenet':mobilenet,
 #     'densenet121':densenet,
 #     'densenet169':densenet,
 #     'densenet201':densenet,
 #     'nasnetmobile':nasnet,
-#     'nasnetlarge':nasnet,
-    'mobilenet_v2':mobilenet_v2
+    'nasnetlarge':nasnet,
+    # 'mobilenet_v2':mobilenet_v2
 #     'efficientnetb0':efficientnet,
 #     'efficientnetb1':efficientnet,
 #     'efficientnetb2':efficientnet,
