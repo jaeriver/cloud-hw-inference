@@ -34,9 +34,9 @@ from concurrent import futures
 from itertools import compress
 
 models = {
-    'xception':xception,
-    'vgg16':vgg16,
-    'vgg19':vgg19,
+#     'xception':xception,
+#     'vgg16':vgg16,
+#     'vgg19':vgg19,
     'resnet50':resnet50,
     'resnet101':resnet,
     'resnet152':resnet,
